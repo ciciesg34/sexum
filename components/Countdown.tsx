@@ -1,20 +1,44 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { COUNTDOWN_SECONDS } from "@/lib/config";
-import ContinueButton from "./ContinueButton";
+import { COUNTDOWN_SECONDS, SMARTLINK_URL } from "@/lib/config";
 
-export default function Countdown() {
+export default function Countdown({ target, code }: { target: string; code: string }) {
   const [sec, setSec] = useState(COUNTDOWN_SECONDS);
+  const [clicked, setClicked] = useState(false);
 
+  // Cek flag saat mount
   useEffect(() => {
-    if (sec <= 0) return;
+    const flag = localStorage.getItem(`clicked_${code}`);
+    if (flag === "1") setClicked(true);
+  }, [code]);
+
+  // Countdown
+  useEffect(() => {
+    if (sec <= 0 || clicked) return;
     const t = setTimeout(() => setSec(sec - 1), 1000);
     return () => clearTimeout(t);
-  }, [sec]);
+  }, [sec, clicked]);
 
-  const progress =
-    ((COUNTDOWN_SECONDS - sec) / COUNTDOWN_SECONDS) * 100;
+  const handleClick = () => {
+    localStorage.setItem(`clicked_${code}`, "1");
+    window.location.href = SMARTLINK_URL;
+  };
+
+  const progress = ((COUNTDOWN_SECONDS - sec) / COUNTDOWN_SECONDS) * 100;
+
+  if (clicked) {
+    return (
+      <div className="mt-6">
+        <a
+          href={target}
+          className="block border-4 border-black bg-[var(--accent)] text-white text-center font-black uppercase text-xl py-5 hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-[6px_6px_0_0_#000]"
+        >
+          Buka Tautan Tujuan
+        </a>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -35,7 +59,12 @@ export default function Countdown() {
         </p>
       ) : (
         <div className="mt-6">
-          <ContinueButton />
+          <button
+            onClick={handleClick}
+            className="w-full border-4 border-black bg-[var(--accent)] text-white text-center font-black uppercase text-xl py-5 hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-[6px_6px_0_0_#000]"
+          >
+            Dapatkan Tautan
+          </button>
         </div>
       )}
     </div>
