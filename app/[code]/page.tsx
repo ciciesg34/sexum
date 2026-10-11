@@ -14,10 +14,6 @@ export default async function Page({
   return (
     <div className="w-full max-w-md">
       <div className="border-4 border-black bg-white p-8">
-        <div className="border-4 border-black bg-black text-white text-xs font-black uppercase inline-block px-3 py-1 mb-4">
-          Tautan Aman
-        </div>
-
         {data.thumbnail && (
           <div className="border-4 border-black mb-4">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -25,16 +21,10 @@ export default async function Page({
               src={data.thumbnail}
               alt="Thumbnail"
               className="w-full h-auto block"
+              loading="lazy"
             />
           </div>
         )}
-
-        <h1 className="text-3xl font-black uppercase tracking-tight mb-2">
-          Tautan Disiapkan
-        </h1>
-        <p className="text-sm font-bold uppercase mb-6 text-neutral-600 break-all">
-          Kode: {code}
-        </p>
 
         <Countdown target={data.url} code={code} />
 
