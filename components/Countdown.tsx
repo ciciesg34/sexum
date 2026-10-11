@@ -7,10 +7,20 @@ export default function Countdown({ target, code }: { target: string; code: stri
   const [sec, setSec] = useState(COUNTDOWN_SECONDS);
   const [clicked, setClicked] = useState(false);
 
-  // Cek flag saat mount
+  // Cek flag: saat mount, saat halaman kembali dari bfcache, saat tab aktif lagi
   useEffect(() => {
-    const flag = localStorage.getItem(`clicked_${code}`);
-    if (flag === "1") setClicked(true);
+    const check = () => {
+      const flag = localStorage.getItem(`clicked_${code}`);
+      if (flag === "1") setClicked(true);
+    };
+
+    check(); // mount
+    window.addEventListener("pageshow", check);       // back/forward
+    window.addEventListener("visibilitychange", check); // tab aktif lagi
+    return () => {
+      window.removeEventListener("pageshow", check);
+      window.removeEventListener("visibilitychange", check);
+    };
   }, [code]);
 
   // Countdown
