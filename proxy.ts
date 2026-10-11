@@ -5,7 +5,7 @@ const rateLimit = new Map<string, { count: number; reset: number }>();
 const LIMIT = 60;
 const WINDOW = 60_000;
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const ip = request.headers.get("x-forwarded-for") ?? "unknown";
   const now = Date.now();
   const entry = rateLimit.get(ip);
