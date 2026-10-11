@@ -8,8 +8,8 @@ export default async function Page({
   params: Promise<{ code: string }>;
 }) {
   const { code } = await params;
-  const target = getLink(code);
-  if (!target) notFound();
+  const data = getLink(code);
+  if (!data) notFound();
 
   return (
     <div className="w-full max-w-md">
@@ -18,6 +18,17 @@ export default async function Page({
           Tautan Aman
         </div>
 
+        {data.thumbnail && (
+          <div className="border-4 border-black mb-4">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={data.thumbnail}
+              alt="Thumbnail"
+              className="w-full h-auto block"
+            />
+          </div>
+        )}
+
         <h1 className="text-3xl font-black uppercase tracking-tight mb-2">
           Tautan Disiapkan
         </h1>
@@ -25,7 +36,7 @@ export default async function Page({
           Kode: {code}
         </p>
 
-        <Countdown target={target} code={code} />
+        <Countdown target={data.url} code={code} />
 
         <p className="mt-6 text-xs font-bold uppercase text-neutral-500 text-center">
           Jangan tutup halaman ini
