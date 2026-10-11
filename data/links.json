@@ -1,4 +1,10 @@
 {
-  "abc123": "https://sexum.vercel.app/abc123",
-  "def456": "https://example.com/lain"
+  "abc123": {
+    "url": "https://www.google.com/search?q=putrijp&oq=&gs_lcrp=EgZjaHJvbWUqCQgIECMYJxjqAjIHCAAQRRixATIJCAEQIxgnGOoCMgkIAhAjGCcY6gIyCQgDECMYJxjqAjIJCAQQIxgnGOoCMgkIBRAjGCcY6gIyCQgGECMYJxjqAjIJCAcQIxgnGOoCMgkICBAjGCcY6gIyCQgJECMYJxjqAjIJCAoQIxgnGOoCMgkICxAjGCcY6gIyCQgMECMYJxjqAjIJCA0QIxgnGOoCMgkIDhAjGCcY6gIyEQgPEAAYAxhCGI8BGLQCGOoCMhEIEBAAGAMYQhiPARi0AhjqAjIRCBEQABgDGEIYjwEYtAIY6gIyEQgSEAAYAxhCGI8BGLQCGOoCMhEIExAAGAMYQhiPARi0AhjqAtIBBi0xajBqN6gCFLACAfEF0uAKo44evsU&client=ms-android-xiaomi-terr1-rso2&sourceid=chrome-mobile&ie=UTF-8",
+    "thumbnail": "https://imagedock.io/t/ufYB9UgC"
+  },
+  "def456": {
+    "url": "https://example.com/lain",
+    "thumbnail": "https://imagedock.io/t/xxxxx"
+  }
 }
