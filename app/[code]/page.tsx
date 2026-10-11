@@ -2,8 +2,13 @@ import { notFound } from "next/navigation";
 import { getLink } from "@/lib/links";
 import Countdown from "@/components/Countdown";
 
-export default function Page({ params }: { params: { code: string } }) {
-  const target = getLink(params.code);
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ code: string }>;
+}) {
+  const { code } = await params;
+  const target = getLink(code);
   if (!target) notFound();
 
   return (
@@ -17,7 +22,7 @@ export default function Page({ params }: { params: { code: string } }) {
           Tautan Disiapkan
         </h1>
         <p className="text-sm font-bold uppercase mb-6 text-neutral-600 break-all">
-          Kode: {params.code}
+          Kode: {code}
         </p>
 
         <Countdown />
