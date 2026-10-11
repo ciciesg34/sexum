@@ -25,7 +25,7 @@ export default async function Page({
           Kode: {code}
         </p>
 
-        <Countdown />
+        <Countdown target={target} code={code} />
 
         <p className="mt-6 text-xs font-bold uppercase text-neutral-500 text-center">
           Jangan tutup halaman ini
