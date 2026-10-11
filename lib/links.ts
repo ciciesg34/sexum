@@ -1,5 +1,10 @@
 import links from "../data/links.json";
 
-export function getLink(code: string): string | null {
-  return (links as Record<string, string>)[code] ?? null;
+export type LinkData = {
+  url: string;
+  thumbnail?: string;
+};
+
+export function getLink(code: string): LinkData | null {
+  return (links as Record<string, LinkData>)[code] ?? null;
 }
