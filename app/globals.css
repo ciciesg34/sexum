@@ -1,9 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f5f5f0;
-  --fg: #0a0a0a;
-  --accent: #ff4d00;
+  --accent: #ff6b00;
+  --accent-dark: #e65f00;
 }
 
 * {
@@ -11,10 +10,38 @@
 }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fff5ec 0%, #ffe8d6 50%, #fff0e0 100%);
+  color: #1a1a1a;
+}
+
+/* Ambient blobs */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::before {
+  width: 400px;
+  height: 400px;
+  background: rgba(255, 107, 0, 0.35);
+  top: -100px;
+  left: -100px;
+}
+
+body::after {
+  width: 500px;
+  height: 500px;
+  background: rgba(255, 160, 80, 0.25);
+  bottom: -150px;
+  right: -150px;
 }
 
 ::selection {
