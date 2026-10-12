@@ -33,8 +33,8 @@ export default async function Image({
           binary += String.fromCharCode(bytes[i]);
         }
         const base64 = btoa(binary);
-        const mime = res.headers.get("content-type") || "image/jpeg";
-        imageSrc = `data:${mime};base64,${base64}`;
+        // Paksa MIME type ke image/jpeg agar Satori & Facebook aman
+        imageSrc = `data:image/jpeg;base64,${base64}`;
       }
     } catch {
       imageSrc = null;
