@@ -37,10 +37,10 @@ export default function Countdown({ target, code }: { target: string; code: stri
 
   if (clicked) {
     return (
-      <div className="mt-6">
+      <div className="mt-1">
         <a
           href={target}
-          className="block border-4 border-black bg-[var(--accent)] text-white text-center font-black uppercase text-xl py-5 hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-[6px_6px_0_0_#000]"
+          className="block w-full text-center font-semibold text-white text-base py-4 rounded-2xl bg-gradient-to-b from-[#ff8a2b] to-[#ff6b00] shadow-[0_10px_30px_-5px_rgba(255,107,0,0.5)] hover:shadow-[0_15px_35px_-5px_rgba(255,107,0,0.65)] hover:-translate-y-0.5 active:translate-y-0 transition-all"
         >
           Buka Tautan Tujuan
         </a>
@@ -50,30 +50,30 @@ export default function Countdown({ target, code }: { target: string; code: stri
 
   return (
     <div>
-      <div className="border-4 border-black bg-black text-white text-5xl font-black text-center py-6">
-        {sec > 0 ? sec : "✓"}
+      <div className="relative flex items-center justify-center py-4">
+        <span className="text-6xl font-bold text-neutral-900 tabular-nums">
+          {sec > 0 ? sec : "✓"}
+        </span>
       </div>
 
-      <div className="border-4 border-t-0 border-black h-3 relative overflow-hidden">
+      <div className="h-2 rounded-full bg-white/70 overflow-hidden mb-5">
         <div
-          className="bg-[var(--accent)] h-full transition-all duration-1000 ease-linear"
+          className="h-full rounded-full bg-gradient-to-r from-[#ff8a2b] to-[#ff6b00] transition-all duration-1000 ease-linear"
           style={{ width: `${progress}%` }}
         />
       </div>
 
       {sec > 0 ? (
-        <p className="mt-4 text-sm font-bold uppercase text-center">
+        <p className="text-sm font-medium text-neutral-600 text-center">
           Menunggu {sec} detik...
         </p>
       ) : (
-        <div className="mt-6">
-          <button
-            onClick={handleClick}
-            className="w-full border-4 border-black bg-[var(--accent)] text-white text-center font-black uppercase text-xl py-5 hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-[6px_6px_0_0_#000]"
-          >
-            Dapatkan Tautan
-          </button>
-        </div>
+        <button
+          onClick={handleClick}
+          className="block w-full text-center font-semibold text-white text-base py-4 rounded-2xl bg-gradient-to-b from-[#ff8a2b] to-[#ff6b00] shadow-[0_10px_30px_-5px_rgba(255,107,0,0.5)] hover:shadow-[0_15px_35px_-5px_rgba(255,107,0,0.65)] hover:-translate-y-0.5 active:translate-y-0 transition-all"
+        >
+          Dapatkan Tautan
+        </button>
       )}
     </div>
   );
