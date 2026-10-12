@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sexum.vercel.app"),
@@ -18,21 +25,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id">
+    <html lang="id" className={inter.variable}>
       <body>
         <div className="min-h-screen flex flex-col">
-          <header className="border-b-4 border-black px-6 py-4">
-            <a href="/" className="font-black text-xl tracking-tight uppercase">
-              Viseum
-            </a>
+          <header className="px-6 py-5">
+            <div className="max-w-md mx-auto flex items-center justify-center">
+              <a
+                href="/"
+                className="font-bold text-lg tracking-tight text-neutral-900"
+              >
+                Viseum
+              </a>
+            </div>
           </header>
 
-          <main className="flex-1 flex items-center justify-center px-6 py-12">
+          <main className="flex-1 flex items-center justify-center px-6 py-8">
             {children}
           </main>
 
-          <footer className="border-t-4 border-black px-6 py-4 text-sm font-bold uppercase text-center">
-            © 2026 viseum - 15319
+          <footer className="px-6 py-6 text-xs text-center text-neutral-500">
+            © 2026 Viseum — 15319
           </footer>
         </div>
       </body>
