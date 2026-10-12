@@ -4,6 +4,9 @@ import { getLink } from "@/lib/links";
 import Countdown from "@/components/Countdown";
 import Histats from "@/components/Histats";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 type Props = {
   params: Promise<{ code: string }>;
 };
@@ -13,14 +16,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = getLink(code);
 
   if (!data) {
-    return {
-      title: "Tidak Ditemukan",
-      description: "",
-    };
+    return { title: "Tidak Ditemukan", description: "" };
   }
 
-  const baseUrl = "https://tribbo.site";
+  const baseUrl = "https://sexum.vercel.app";
   const pageUrl = `${baseUrl}/${code}`;
+  const ogImageUrl = `${baseUrl}/${code}/opengraph-image`;
 
   return {
     metadataBase: new URL(baseUrl),
@@ -32,13 +33,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: "Klik untuk membuka tautan tujuan Anda.",
       url: pageUrl,
       type: "website",
-      images: [`${baseUrl}/${code}/opengraph-image`],
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: "Thumbnail",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: "Tautan Disiapkan",
       description: "Klik untuk membuka tautan tujuan Anda.",
-      images: [`${baseUrl}/${code}/opengraph-image`],
+      images: [ogImageUrl],
     },
   };
 }
