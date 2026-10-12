@@ -1,9 +1,10 @@
 import { ImageResponse } from "next/og";
 import { getLink } from "@/lib/links";
+import sharp from "sharp";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 export default async function Image({
   params,
@@ -26,17 +27,19 @@ export default async function Image({
       });
 
       if (res.ok) {
-        const buf = await res.arrayBuffer();
-        const bytes = new Uint8Array(buf);
-        let binary = "";
-        for (let i = 0; i < bytes.length; i++) {
-          binary += String.fromCharCode(bytes[i]);
-        }
-        const base64 = btoa(binary);
-        // Paksa MIME type ke image/jpeg agar Satori & Facebook aman
-        imageSrc = `data:image/jpeg;base64,${base64}`;
+        const arrayBuffer = await res.arrayBuffer();
+        const inputBuffer = Buffer.from(arrayBuffer);
+
+        // Konversi paksa ke JPEG menggunakan sharp
+        const jpegBuffer = await sharp(inputBuffer)
+          .resize(1200, 630, { fit: "cover" })
+          .jpeg({ quality: 85 })
+          .toBuffer();
+
+        imageSrc = `data:image/jpeg;base64,${jpegBuffer.toString("base64")}`;
       }
-    } catch {
+    } catch (e) {
+      console.error("Fetch/convert thumbnail error:", e);
       imageSrc = null;
     }
   }
