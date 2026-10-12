@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getLink } from "@/lib/links";
 import Countdown from "@/components/Countdown";
+import Histats from "@/components/Histats";
 
 export default async function Page({
   params,
@@ -32,6 +33,7 @@ export default async function Page({
           Jangan tutup halaman ini
         </p>
       </div>
+      <Histats />
     </div>
   );
 }
