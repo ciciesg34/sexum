@@ -32,22 +32,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: "Klik untuk membuka tautan tujuan Anda.",
       url: pageUrl,
       type: "website",
-      images: data.thumbnail
-        ? [
-            {
-              url: data.thumbnail,
-              width: 1200,
-              height: 630,
-              alt: "Thumbnail",
-            },
-          ]
-        : [],
+      images: [`${baseUrl}/${code}/opengraph-image`],
     },
     twitter: {
       card: "summary_large_image",
       title: "Tautan Disiapkan",
       description: "Klik untuk membuka tautan tujuan Anda.",
-      images: data.thumbnail ? [data.thumbnail] : [],
+      images: [`${baseUrl}/${code}/opengraph-image`],
     },
   };
 }
