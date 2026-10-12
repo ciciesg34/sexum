@@ -1,13 +1,58 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getLink } from "@/lib/links";
 import Countdown from "@/components/Countdown";
 import Histats from "@/components/Histats";
 
-export default async function Page({
-  params,
-}: {
+type Props = {
   params: Promise<{ code: string }>;
-}) {
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { code } = await params;
+  const data = getLink(code);
+
+  if (!data) {
+    return {
+      title: "Tidak Ditemukan",
+      description: "",
+    };
+  }
+
+  const baseUrl = "https://tribbo.site";
+  const pageUrl = `${baseUrl}/${code}`;
+
+  return {
+    metadataBase: new URL(baseUrl),
+    title: "Tautan Disiapkan",
+    description: "Klik untuk membuka tautan tujuan Anda.",
+    alternates: { canonical: pageUrl },
+    openGraph: {
+      title: "Tautan Disiapkan",
+      description: "Klik untuk membuka tautan tujuan Anda.",
+      url: pageUrl,
+      type: "website",
+      images: data.thumbnail
+        ? [
+            {
+              url: data.thumbnail,
+              width: 1200,
+              height: 630,
+              alt: "Thumbnail",
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Tautan Disiapkan",
+      description: "Klik untuk membuka tautan tujuan Anda.",
+      images: data.thumbnail ? [data.thumbnail] : [],
+    },
+  };
+}
+
+export default async function Page({ params }: Props) {
   const { code } = await params;
   const data = getLink(code);
   if (!data) notFound();
